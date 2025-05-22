@@ -5,30 +5,36 @@ import numpy as np
 import streamlit as st
 
 st.markdown(
-    f"""
+    """
     <style>
-    .stApp {{
+    .stApp {
         background-image: url("https://images5.alphacoders.com/443/443997.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-    }}
+    }
 
-    .stApp::before {{
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.7);  /* White overlay with 70% opacity */
-        z-index: -1;
-    }}
+    .glass-box {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 90%;
+        max-width: 700px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    .glass-box h1, .glass-box h2, .glass-box h3, .glass-box p {
+        color: #000000;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
