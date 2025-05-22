@@ -2,8 +2,9 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# === CSS: background, overlay, blur, and layout ===
-st.markdown("""
+# === CSS: Background image, blur, overlay, glass effect, text color ===
+st.markdown(
+    """
     <style>
     .stApp {
         background-image: url("https://images5.alphacoders.com/443/443997.jpg");
@@ -11,6 +12,7 @@ st.markdown("""
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        margin-top: -5rem;
         position: relative;
     }
 
@@ -19,9 +21,9 @@ st.markdown("""
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);  /* Darken background */
         z-index: -1;
     }
 
@@ -31,9 +33,9 @@ st.markdown("""
         -webkit-backdrop-filter: blur(20px);
         border-radius: 16px;
         padding: 2rem;
-        margin: 3rem auto;
-        max-width: 700px;
+        margin: 2rem auto;
         width: 90%;
+        max-width: 700px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
 
@@ -46,38 +48,43 @@ st.markdown("""
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    .glass-box h1, .glass-box p, label {
+    .glass-box h1, .glass-box h2, .glass-box h3, .glass-box p,
+    .result-box p, .stMarkdown, label {
         color: #f9f6f2 !important;
+        font-weight: 600;
     }
 
     .stSlider > div > div {
         background-color: #ffffff22 !important;
     }
 
+    .css-1v0mbdj { padding-top: 0rem !important; }
     </style>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
-# === Start layout ===
+# === Glass container begins ===
 st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-# === Title ===
+# === Custom title ===
 st.markdown(
     "<h1 style='text-align: center; color: #ffcc70;'>🍷 Wine Quality Predictor</h1>",
     unsafe_allow_html=True
 )
 
-st.write("Adjust the wine properties below and click Predict Quality.")
+st.write("Adjust the chemical properties below and click **Predict Quality** to see if the wine is likely good.")
 
 # === Load model ===
 model = joblib.load("wine_model.pkl")
 
-# === Sliders ===
-alcohol = st.slider("Alcohol", 8.0, 15.0)
-sulphates = st.slider("Sulphates", 0.3, 2.0)
-citric_acid = st.slider("Citric Acid", 0.0, 1.0)
-volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6)
-density = st.slider("Density", 0.9900, 1.0040)
-chlorides = st.slider("Chlorides", 0.01, 0.6)
+# === Input sliders ===
+alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
+sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
+citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
+volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
+density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
+chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
 # === Predict on button click ===
 if st.button("🔍 Predict Quality"):
@@ -86,20 +93,19 @@ if st.button("🔍 Predict Quality"):
 
     st.markdown('<div class="result-box">', unsafe_allow_html=True)
     if prediction == 1:
-        st.success("✅ This wine is likely GOOD quality.")
+        st.success("✅ This wine is likely **GOOD** quality.")
     else:
-        st.error("⚠️ This wine is likely NOT good quality.")
+        st.error("⚠️ This wine is likely **NOT good** quality.")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# === About ===
+# === About section ===
 st.markdown("### 📌 About this App")
 st.markdown("""
-This app uses a machine learning model trained on the [Wine Quality Dataset](https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009)  
-to predict if red wine is likely to be good quality.
+This wine predictor uses a machine learning model to determine the quality of red wine based on several chemical attributes.  
+Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
 
-Created with ❤️ by **Zeina Mkhaeel**  
 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
-# === End glass box ===
+# === End of glass container ===
 st.markdown('</div>', unsafe_allow_html=True)
