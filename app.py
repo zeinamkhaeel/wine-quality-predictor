@@ -2,10 +2,34 @@ import streamlit as st
 import joblib
 import numpy as np
 
-st.image(
-    "https://images5.alphacoders.com/443/443997.jpg",
-    use_container_width=True
+import streamlit as st
+
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("https://images5.alphacoders.com/443/443997.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+
+    .stApp::before {{
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.7);  /* White overlay with 70% opacity */
+        z-index: -1;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
 )
+
 
 model = joblib.load('wine_model.pkl')
 
