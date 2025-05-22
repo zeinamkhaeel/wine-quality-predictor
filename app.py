@@ -2,8 +2,10 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# Add a visual banner at the top
-st.image("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80", use_column_width=True)
+st.image(
+    "https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80",
+    use_container_width=True
+)
 
 model = joblib.load('wine_model.pkl')
 
