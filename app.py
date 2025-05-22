@@ -41,7 +41,6 @@ st.markdown(
 )
 
 
-
 model = joblib.load('wine_model.pkl')
 
 st.title("🍷 Wine Quality Predictor")
