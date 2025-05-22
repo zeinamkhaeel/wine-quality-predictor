@@ -2,17 +2,29 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# === CSS Styling ===
+# === Enhanced CSS for layout, sliders, and darker blurry background ===
 st.markdown(
     """
     <style>
+    /* Replace default background with dark blurry image */
     .stApp {
+        background: none;
+        margin-top: -5rem;
+        position: relative;
+    }
+
+    .stApp::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
         background-image: url("https://images5.alphacoders.com/443/443997.jpg");
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        margin-top: -5rem;
+        filter: blur(10px) brightness(0.4);  /* More blur + darker */
+        z-index: -1;
     }
 
     .glass-box {
@@ -42,21 +54,21 @@ st.markdown(
         font-weight: 600;
     }
 
-    /* Bigger slider track */
+    /* Slider track */
     div[data-baseweb="slider"] > div {
         background-color: #ffffffaa !important;
-        height: 12px !important;
-        border-radius: 8px !important;
-        margin-top: 14px !important;
-        margin-bottom: 14px !important;
+        height: 12px;
+        border-radius: 8px;
+        margin-top: 14px;
+        margin-bottom: 14px;
     }
 
     /* Slider thumb */
     div[data-baseweb="slider"] [role="slider"] {
         background-color: #ffcc70 !important;
         border: 2px solid white;
-        height: 20px !important;
-        width: 20px !important;
+        height: 20px;
+        width: 20px;
         border-radius: 50%;
         box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
     }
@@ -73,10 +85,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# === Begin Container ===
+# === Glass Container Start ===
 st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-# === Title ===
+# Title
 st.markdown(
     "<h1 style='text-align: center; color: #ffcc70;'>🍷 Wine Quality Predictor</h1>",
     unsafe_allow_html=True
@@ -84,10 +96,10 @@ st.markdown(
 
 st.write("Adjust the chemical properties below and click 'Predict Quality' to see if the wine is likely good.")
 
-# === Load the model ===
+# Load model
 model = joblib.load("wine_model.pkl")
 
-# === Input sliders ===
+# Input sliders
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
 sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
 citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
@@ -95,7 +107,7 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Prediction button ===
+# Predict button
 if st.button("🔍 Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
@@ -107,7 +119,7 @@ if st.button("🔍 Predict Quality"):
         st.error("⚠️ This wine is likely NOT good quality.")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# === About section ===
+# About section
 st.markdown("### 📌 About this App")
 st.markdown("""
 This wine predictor uses a machine learning model to determine the quality of red wine based on several chemical attributes.  
@@ -116,5 +128,4 @@ Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
-# === End Container ===
 st.markdown('</div>', unsafe_allow_html=True)
