@@ -5,9 +5,9 @@ def set_bg_image():
         f"""
         <style>
         .stApp {{
-            background-image: url("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f");
+            background-image: url("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80");
             background-size: cover;
-            background-position: top center;
+            background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }}
@@ -15,6 +15,7 @@ def set_bg_image():
         """,
         unsafe_allow_html=True
     )
+
 
 set_bg_image()
 
