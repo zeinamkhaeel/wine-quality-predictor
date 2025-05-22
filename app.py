@@ -2,11 +2,11 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# === Enhanced CSS for layout, sliders, and darker blurry background ===
+# === Enhanced CSS ===
 st.markdown(
     """
     <style>
-    /* Replace default background with dark blurry image */
+    /* Background blur + darkness */
     .stApp {
         background: none;
         margin-top: -5rem;
@@ -23,7 +23,7 @@ st.markdown(
         background-image: url("https://images5.alphacoders.com/443/443997.jpg");
         background-size: cover;
         background-position: center;
-        filter: blur(10px) brightness(0.4);  /* More blur + darker */
+        filter: blur(10px) brightness(0.4);
         z-index: -1;
     }
 
@@ -48,35 +48,35 @@ st.markdown(
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    .glass-box h1, .glass-box h2, .glass-box h3, .glass-box p,
-    .result-box p, .stMarkdown, label {
+    .glass-box h1, .glass-box p, label, .result-box p {
         color: #f9f6f2 !important;
         font-weight: 600;
     }
 
-    /* Slider track */
-    div[data-baseweb="slider"] > div {
-        background-color: #ffffffaa !important;
-        height: 12px;
-        border-radius: 8px;
-        margin-top: 14px;
-        margin-bottom: 14px;
+    /* Improved slider style */
+    div[data-baseweb="slider"] {
+        padding: 20px 0;
     }
 
-    /* Slider thumb */
+    div[data-baseweb="slider"] > div {
+        background-color: #cccccc !important;
+        height: 12px !important;
+        border-radius: 6px;
+    }
+
     div[data-baseweb="slider"] [role="slider"] {
         background-color: #ffcc70 !important;
-        border: 2px solid white;
-        height: 20px;
-        width: 20px;
+        border: 2px solid #ffffff;
+        height: 24px !important;
+        width: 24px !important;
         border-radius: 50%;
-        box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+        box-shadow: 0 0 6px rgba(255, 204, 112, 0.7);
     }
 
-    /* Slider number labels */
     div[data-baseweb="slider"] span {
         color: #f9f6f2 !important;
         font-weight: bold;
+        font-size: 16px;
     }
 
     .css-1v0mbdj { padding-top: 0rem !important; }
@@ -88,7 +88,7 @@ st.markdown(
 # === Glass Container Start ===
 st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-# Title
+# === Title ===
 st.markdown(
     "<h1 style='text-align: center; color: #ffcc70;'>🍷 Wine Quality Predictor</h1>",
     unsafe_allow_html=True
@@ -96,10 +96,10 @@ st.markdown(
 
 st.write("Adjust the chemical properties below and click 'Predict Quality' to see if the wine is likely good.")
 
-# Load model
+# === Load model ===
 model = joblib.load("wine_model.pkl")
 
-# Input sliders
+# === Sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
 sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
 citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
@@ -107,7 +107,7 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# Predict button
+# === Predict Button ===
 if st.button("🔍 Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
@@ -119,7 +119,7 @@ if st.button("🔍 Predict Quality"):
         st.error("⚠️ This wine is likely NOT good quality.")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# About section
+# === About ===
 st.markdown("### 📌 About this App")
 st.markdown("""
 This wine predictor uses a machine learning model to determine the quality of red wine based on several chemical attributes.  
@@ -128,4 +128,5 @@ Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
+# === End of Container ===
 st.markdown('</div>', unsafe_allow_html=True)
