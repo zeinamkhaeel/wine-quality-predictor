@@ -13,11 +13,12 @@ st.markdown(
         background-repeat: no-repeat;
         background-attachment: fixed;
         margin-top: -5rem;
+        position: relative;
     }
 
     .glass-box {
         background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(20px);  /* Increased blur */
+        backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 16px;
         padding: 2rem;
@@ -42,8 +43,10 @@ st.markdown(
         font-weight: 600;
     }
 
+    /* Brighter slider track */
     .stSlider > div > div {
-        background-color: #ffffff22 !important;
+        background-color: #ffffffaa !important;  /* lighter slider track */
+        border-radius: 5px;
     }
 
     .css-1v0mbdj { padding-top: 0rem !important; }
@@ -95,4 +98,5 @@ Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
-st.markdown('</div>', unsafe_allow_html=True) 
+# === Close Glass Container ===
+st.markdown('</div>', unsafe_allow_html=True)
