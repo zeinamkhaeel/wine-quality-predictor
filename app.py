@@ -1,25 +1,9 @@
 import streamlit as st
-
-
-st.markdown(
-    """
-    <style>
-        .stApp {
-            background-image: url("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
-
 import joblib
 import numpy as np
+
+# Add a visual banner at the top
+st.image("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80", use_column_width=True)
 
 model = joblib.load('wine_model.pkl')
 
