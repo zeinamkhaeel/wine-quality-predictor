@@ -2,20 +2,25 @@ import streamlit as st
 
 def set_bg_image():
     st.markdown(
-        f"""
+        """
         <style>
-        body {{
-            background-image: url("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80");
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            background-image: url('https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }}
+            opacity: 0.3;
+        }
         </style>
+        <div class="bg-container"></div>
         """,
         unsafe_allow_html=True
     )
-
 set_bg_image()
 
 import joblib
