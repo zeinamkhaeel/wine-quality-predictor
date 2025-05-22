@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# === Enhanced CSS for layout, sliders, and style ===
+# === Enhanced CSS for layout, sliders, and colors ===
 st.markdown(
     """
     <style>
@@ -42,20 +42,27 @@ st.markdown(
         font-weight: 600;
     }
 
-    /* === Slider Styling === */
+    /* Slider track */
     div[data-baseweb="slider"] > div {
-        background-color: #ffffffaa !important;  /* Light slider track */
+        background-color: #ffffffaa !important;
         height: 6px;
         border-radius: 5px;
     }
 
+    /* Slider thumb */
     div[data-baseweb="slider"] [role="slider"] {
-        background-color: #ffcc70 !important;  /* Gold thumb */
+        background-color: #ffcc70 !important;
         border: 2px solid white;
         height: 18px;
         width: 18px;
         border-radius: 50%;
         box-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Slider number labels */
+    div[data-baseweb="slider"] span {
+        color: #f9f6f2 !important;
+        font-weight: bold;
     }
 
     .css-1v0mbdj { padding-top: 0rem !important; }
@@ -67,7 +74,7 @@ st.markdown(
 # === Glass Container Start ===
 st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-# === Title ===
+# Title
 st.markdown(
     "<h1 style='text-align: center; color: #ffcc70;'>🍷 Wine Quality Predictor</h1>",
     unsafe_allow_html=True
@@ -75,10 +82,10 @@ st.markdown(
 
 st.write("Adjust the chemical properties below and click 'Predict Quality' to see if the wine is likely good.")
 
-# === Load the model ===
+# Load model
 model = joblib.load("wine_model.pkl")
 
-# === Input sliders ===
+# Input sliders
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
 sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
 citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
@@ -86,7 +93,7 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Predict Button ===
+# Predict button
 if st.button("🔍 Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
@@ -98,7 +105,7 @@ if st.button("🔍 Predict Quality"):
         st.error("⚠️ This wine is likely NOT good quality.")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# === About Section ===
+# About section
 st.markdown("### 📌 About this App")
 st.markdown("""
 This wine predictor uses a machine learning model to determine the quality of red wine based on several chemical attributes.  
@@ -107,5 +114,4 @@ Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
-# === Close container ===
 st.markdown('</div>', unsafe_allow_html=True)
