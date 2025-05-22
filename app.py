@@ -1,27 +1,21 @@
 import streamlit as st
 
-import streamlit as st
 
-def set_bg_image():
-    st.markdown(
-        """
-        <div style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background-image: url('https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80');
+st.markdown(
+    """
+    <style>
+        .stApp {
+            background-image: url("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80");
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
-            z-index: -1;
-        "></div>
-        """,
-        unsafe_allow_html=True
-    )
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-set_bg_image()  # <- this must come after the function
 
 
 import joblib
