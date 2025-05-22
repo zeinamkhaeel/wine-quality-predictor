@@ -4,7 +4,7 @@ def set_bg_image():
     st.markdown(
         f"""
         <style>
-        .stApp {{
+        body {{
             background-image: url("https://images.unsplash.com/photo-1604917877931-84c43b1a1e5f?auto=format&fit=crop&w=1500&q=80");
             background-size: cover;
             background-position: center;
@@ -15,7 +15,6 @@ def set_bg_image():
         """,
         unsafe_allow_html=True
     )
-
 
 set_bg_image()
 
