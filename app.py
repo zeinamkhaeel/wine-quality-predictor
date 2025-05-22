@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# === CSS Styling ===
+# === Enhanced CSS for layout and style ===
 st.markdown(
     """
     <style>
@@ -12,13 +12,12 @@ st.markdown(
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        position: relative;
         margin-top: -5rem;
     }
 
     .glass-box {
         background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);  /* Increased blur */
         -webkit-backdrop-filter: blur(20px);
         border-radius: 16px;
         padding: 2rem;
@@ -37,47 +36,34 @@ st.markdown(
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    .glass-box h1, .glass-box p, label, .result-box p {
+    .glass-box h1, .glass-box h2, .glass-box h3, .glass-box p,
+    .result-box p, .stMarkdown, label {
         color: #f9f6f2 !important;
         font-weight: 600;
     }
 
-    /* Improve slider visibility */
-    .stSlider > div {
-        padding: 6px 0 !important;
-    }
-
     .stSlider > div > div {
-        background: #f0f0f0 !important;  /* Lighter track */
-        border-radius: 4px;
-        height: 4px !important;
+        background-color: #ffffff22 !important;
     }
 
-    .stSlider input[type=range]::-webkit-slider-thumb {
-        background: #ffcc70 !important;  /* Gold thumb */
-        border: 2px solid white;
-        height: 16px;
-        width: 16px;
-        border-radius: 50%;
-    }
-
-    .stSlider input[type=range]:focus {
-        outline: none;
-    }
-
+    .css-1v0mbdj { padding-top: 0rem !important; }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# === Start Layout ===
+# === Glass Container Start ===
 st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-# Title
-st.markdown("<h1 style='text-align: center; color: #ffcc70;'>🍷 Wine Quality Predictor</h1>", unsafe_allow_html=True)
-st.write("Adjust the wine properties below and click Predict Quality.")
+# === Custom-Colored Title ===
+st.markdown(
+    "<h1 style='text-align: center; color: #ffcc70;'>🍷 Wine Quality Predictor</h1>",
+    unsafe_allow_html=True
+)
 
-# Load model
+st.write("Adjust the chemical properties below and click 'Predict Quality' to see if the wine is likely good.")
+
+# Load your model
 model = joblib.load("wine_model.pkl")
 
 # Input sliders
@@ -100,7 +86,7 @@ if st.button("🔍 Predict Quality"):
         st.error("⚠️ This wine is likely NOT good quality.")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# About
+# About section
 st.markdown("### 📌 About this App")
 st.markdown("""
 This wine predictor uses a machine learning model to determine the quality of red wine based on several chemical attributes.  
@@ -109,4 +95,4 @@ Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True) 
