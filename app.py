@@ -2,8 +2,10 @@ import streamlit as st
 import joblib
 import numpy as np
 
-st.image(
-    "https://www.google.com/search?q=wine+background+images&rlz=1C1GCEU_itIT1162IT1162&oq=wine+bac&gs_lcrp=EgZjaHJvbWUqBwgFEAAYgAQyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDk2ODFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#vhid=sDle0p_qxuW25M&vssid=_BV4vaOmQCoOoi-gP5--H2AI_45",
+st.Image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwall.alphacoders.com%2Fbig.php%3Fi%3D443997&psig=AOvVaw00vkBzm8Iy4z9uV0yRbSum&ust=1748021502962000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOCc8d7Nt40DFQAAAAAdAAAAABAE",
+    use_container_width=True
+)
+
     use_container_width=True
 )
 
