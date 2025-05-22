@@ -2,17 +2,16 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# === Enhanced CSS ===
+# === CSS Styling ===
 st.markdown("""
     <style>
     .stApp {
-        background-image: url("https://images5.alphacoders.com/443/443997.jpg");
+        background-image: url('https://images5.alphacoders.com/443/443997.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
         position: relative;
-        margin-top: -5rem;
     }
 
     .stApp::before {
@@ -20,82 +19,69 @@ st.markdown("""
         position: fixed;
         top: 0;
         left: 0;
-        height: 100%;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.25); /* Lighten background */
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3);  /* Lighten background */
         z-index: -1;
     }
 
     .glass-box {
-        background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border-radius: 16px;
         padding: 2rem;
-        margin: 2rem auto;
-        width: 90%;
+        margin: 3rem auto;
         max-width: 700px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     }
 
-    .result-box {
-        background: rgba(255, 255, 255, 0.6);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-top: 2rem;
-        text-align: center;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-
-    .glass-box h1, .glass-box p, label, .result-box p {
-        color: #222222 !important;
+    .glass-box h1, label, p {
+        color: #222 !important;
         font-weight: 600;
     }
 
     .stSlider > div > div {
-        background-color: #ffffff88 !important;
+        background-color: #ffffff55 !important;
     }
-
-    .css-1v0mbdj { padding-top: 0rem !important; }
     </style>
 """, unsafe_allow_html=True)
 
-# === Start layout ===
+# === App layout ===
 st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color: #d87e00;'>🍷 Wine Quality Predictor</h1>", unsafe_allow_html=True)
-st.write("Adjust the chemical properties below and click 'Predict Quality' to see if the wine is likely good.")
+# Title
+st.markdown("<h1 style='text-align: center; color: #c45f1a;'>🍷 Wine Quality Predictor</h1>", unsafe_allow_html=True)
+st.write("Adjust wine properties and click to predict quality.")
 
-# === Load model ===
+# Load model
 model = joblib.load("wine_model.pkl")
 
-# === Sliders ===
-alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
-sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
-citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
-volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
-density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
-chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
+# Inputs
+alcohol = st.slider("Alcohol", 8.0, 15.0)
+sulphates = st.slider("Sulphates", 0.3, 2.0)
+citric_acid = st.slider("Citric Acid", 0.0, 1.0)
+volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6)
+density = st.slider("Density", 0.9900, 1.0040)
+chlorides = st.slider("Chlorides", 0.01, 0.6)
 
-# === Predict button ===
+# Prediction
 if st.button("🔍 Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
-
-    st.markdown('<div class="result-box">', unsafe_allow_html=True)
+    
     if prediction == 1:
         st.success("✅ This wine is likely GOOD quality.")
     else:
         st.error("⚠️ This wine is likely NOT good quality.")
-    st.markdown('</div>', unsafe_allow_html=True)
 
-# === About section ===
+# About
 st.markdown("### 📌 About this App")
 st.markdown("""
-This wine predictor uses a machine learning model to determine the quality of red wine based on several chemical attributes.  
-Built with Scikit-learn and Streamlit by **Zeina Mkhaeel**.
+This app uses a machine learning model to predict the quality of red wine based on its chemical properties.
 
-🔗 [GitHub](https://github.com/zeinamkhaeel)
+Built by **Zeina Mkhaeel** · 🔗 [GitHub](https://github.com/zeinamkhaeel)
 """)
 
+# Close glass container
 st.markdown('</div>', unsafe_allow_html=True)
