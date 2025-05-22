@@ -1,7 +1,7 @@
 import streamlit as st
 
 def set_bg_image():
-    st.markdown(
+    st. markdown(
         """
         <style>
         .bg-container {
