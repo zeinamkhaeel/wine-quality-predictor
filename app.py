@@ -2,10 +2,8 @@ import streamlit as st
 import joblib
 import numpy as np
 
-st.Image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwall.alphacoders.com%2Fbig.php%3Fi%3D443997&psig=AOvVaw00vkBzm8Iy4z9uV0yRbSum&ust=1748021502962000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOCc8d7Nt40DFQAAAAAdAAAAABAE",
-    use_container_width=True
-)
-
+st.image(
+    "https://images5.alphacoders.com/443/443997.jpg",
     use_container_width=True
 )
 
