@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background and styles ===
+# === Background and button styling ===
 st.markdown(
     """
     <style>
@@ -24,14 +24,15 @@ st.markdown(
         padding: 0.75em 1.5em;
         border-radius: 8px;
         background-color: #ffcc70;
-        color: black;
+        color: black !important;
         font-weight: 600;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
+        border: none;
     }
 
     .stButton > button:hover {
         background-color: #e6a940;
-        color: black;
+        color: black !important;
     }
 
     .result-spacer {
@@ -50,11 +51,11 @@ except:
     st.error("⚠️ Could not load model file. Please check 'wine_model.pkl'.")
     st.stop()
 
-# === Title ===
+# === App Title and Instructions ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics and press **Predict Quality**:")
+st.write("Adjust the wine characteristics and press **Predict Quality**.")
 
-# === Input Sliders ===
+# === Input sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
 sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
 citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
@@ -62,16 +63,16 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Predict Button and Session State Logic ===
+# === Maintain prediction result across reruns ===
 if "prediction_result" not in st.session_state:
     st.session_state.prediction_result = None
 
-if st.button("Predict Quality"):
+if st.button("🔍 Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
     st.session_state.prediction_result = prediction
 
-# === Display Stored Prediction ===
+# === Display prediction result if available ===
 if st.session_state.prediction_result is not None:
     st.markdown("### Prediction Result:")
     if st.session_state.prediction_result == 1:
