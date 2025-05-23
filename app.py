@@ -2,30 +2,30 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background image using local file ===
+# === Background image from Google Drive ===
 st.markdown(
-    f"""
+    """
     <style>
-    .stApp {{
-        background-image: url("data:image/jpg;base64,{st.file_uploader("Upload image", type=["jpg", "jpeg", "png"], label_visibility="collapsed").getvalue().decode('utf-8')}");
+    .stApp {
+        background-image: url("https://drive.google.com/uc?export=view&id=1V9gwMIc3tDxTOG01GS_NAha64SwK1ehY");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-    }}
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# === Load model ===
+# === Load your model ===
 model = joblib.load('wine_model.pkl')
 
-# === Title and instructions ===
+# === App UI ===
 st.title("🍷 Wine Quality Predictor")
 st.write("Input the wine characteristics to predict if it's good quality.")
 
-# === Input sliders ===
+# === Sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
 sulphates = st.slider("Sulphates", 0.3, 2.0, step=0.01)
 citric_acid = st.slider("Citric Acid", 0.0, 1.0, step=0.01)
