@@ -53,7 +53,7 @@ except:
 
 # === App Title and Instructions ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics and press **Predict Quality**.")
+st.write("Adjust the wine characteristics and press **Predict Quality**:")
 
 # === Input sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
@@ -67,7 +67,7 @@ chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 if "prediction_result" not in st.session_state:
     st.session_state.prediction_result = None
 
-if st.button("🔍 Predict Quality"):
+if st.button("Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
     st.session_state.prediction_result = prediction
