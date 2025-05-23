@@ -2,30 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background Image (standard method) ===
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("https://i.imgur.com/1c5bD5B.jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-    }
 
-    /* Make text and labels readable */
-    .stMarkdown, .css-10trblm, .css-1v0mbdj, label {
-        color: #ffffff !important;
-    }
-
-    .stSlider > div {
-        color: white !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # === Load model ===
 model = joblib.load("wine_model.pkl")
