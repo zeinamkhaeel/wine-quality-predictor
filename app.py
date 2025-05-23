@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Custom styling ===
+# === Background and styles ===
 st.markdown(
     """
     <style>
@@ -19,7 +19,6 @@ st.markdown(
         font-weight: bold;
     }
 
-    /* Predict button styling */
     .stButton > button {
         font-size: 18px !important;
         padding: 0.75em 1.5em;
@@ -35,7 +34,6 @@ st.markdown(
         color: black;
     }
 
-    /* Add visual spacing below result */
     .result-spacer {
         margin-top: 30px;
         margin-bottom: 40px;
@@ -45,16 +43,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# === Load the model safely ===
+# === Load model safely ===
 try:
     model = joblib.load("wine_model.pkl")
 except:
     st.error("⚠️ Could not load model file. Please check 'wine_model.pkl'.")
     st.stop()
 
-# === Title and instructions ===
+# === Title ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics and press **Predict Quality**.")
+st.write("Adjust the wine characteristics and press **Predict Quality**:")
 
 # === Input Sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
@@ -64,21 +62,25 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Predict Button and Output ===
-if st.button("🔍 Predict Quality"):
+# === Predict Button and Session State Logic ===
+if "prediction_result" not in st.session_state:
+    st.session_state.prediction_result = None
+
+if st.button("Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
+    st.session_state.prediction_result = prediction
 
+# === Display Stored Prediction ===
+if st.session_state.prediction_result is not None:
     st.markdown("### Prediction Result:")
-    if prediction == 1:
+    if st.session_state.prediction_result == 1:
         st.success("✅ This wine is likely GOOD quality.")
     else:
         st.error("⚠️ This wine is likely NOT good quality.")
-
-    # Visual spacing before About section
     st.markdown('<div class="result-spacer"></div>', unsafe_allow_html=True)
 
-# === About the App ===
+# === About Section ===
 with st.expander("📌 About this App"):
     st.markdown("""
     This wine quality prediction tool uses a trained machine learning model to estimate wine quality 
