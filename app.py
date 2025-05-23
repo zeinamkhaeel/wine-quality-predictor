@@ -7,7 +7,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://drive.google.com/uc?export=view&id=1V9gwMIc3tDxTOG01GS_NAha64SwK1ehY");
+        background-image: url("https://images.unsplash.com/photo-1608547686035-8f8b6d9a0c91?auto=format&fit=crop&w=1600&q=80");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -17,6 +17,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # === Load your model ===
 model = joblib.load('wine_model.pkl')
