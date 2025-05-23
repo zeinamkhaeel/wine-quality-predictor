@@ -1,7 +1,0 @@
-[theme]
-base="light"
-primaryColor="#7B3F00"               # Deep wine brown
-backgroundColor="#FFF8F0"            # Soft beige
-secondaryBackgroundColor="#FAEBD7"   # Antique white
-textColor="#333333"
-font="sans serif"
