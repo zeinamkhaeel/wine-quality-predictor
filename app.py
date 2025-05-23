@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Safe Background Image CSS (NO z-index or ::before) ===
+# === Background Image (standard method) ===
 st.markdown(
     """
     <style>
@@ -11,13 +11,16 @@ st.markdown(
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed;
-        padding: 2rem;
+        background-attachment: scroll;
     }
 
-    h1, .stMarkdown, label {
+    /* Make text and labels readable */
+    .stMarkdown, .css-10trblm, .css-1v0mbdj, label {
         color: #ffffff !important;
-        font-weight: bold;
+    }
+
+    .stSlider > div {
+        color: white !important;
     }
     </style>
     """,
@@ -43,6 +46,7 @@ chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
 prediction = model.predict(input_data)[0]
 
+# === Output ===
 st.markdown("### Prediction:")
 if prediction == 1:
     st.success("✅ Good Quality Wine")
