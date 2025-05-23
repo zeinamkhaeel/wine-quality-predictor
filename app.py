@@ -1,7 +1,41 @@
 import streamlit as st
-import joblib
 import numpy as np
+import joblib
 
+# === Background image behind the content using overlay ===
+st.markdown(
+    """
+    <style>
+    .stApp {
+        position: relative;
+        background: none;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url("https://i.imgur.com/1c5bD5B.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        opacity: 0.3;
+        z-index: -1;
+    }
+
+    /* Text readability */
+    .stMarkdown, .css-10trblm, .css-1v0mbdj, label {
+        color: white !important;
+        font-weight: bold;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # === Load model ===
