@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background image (from Imgur) ===
+# === Safe Background Image CSS (NO z-index or ::before) ===
 st.markdown(
     """
     <style>
@@ -12,22 +12,22 @@ st.markdown(
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        padding: 2rem;
     }
 
-    /* Make all text more readable */
-    .stMarkdown, .css-10trblm, .css-1v0mbdj, label {
+    h1, .stMarkdown, label {
         color: #ffffff !important;
-        font-weight: 600;
+        font-weight: bold;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# === Load the ML model ===
-model = joblib.load('wine_model.pkl')
+# === Load model ===
+model = joblib.load("wine_model.pkl")
 
-# === App Title ===
+# === Title ===
 st.title("🍷 Wine Quality Predictor")
 st.write("Input the wine characteristics to predict if it's good quality.")
 
@@ -39,11 +39,10 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Make Prediction ===
+# === Prediction ===
 input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
 prediction = model.predict(input_data)[0]
 
-# === Display Result ===
 st.markdown("### Prediction:")
 if prediction == 1:
     st.success("✅ Good Quality Wine")
