@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background Image ===
+# === Background image and styling ===
 st.markdown(
     """
     <style>
@@ -18,21 +18,36 @@ st.markdown(
         color: white !important;
         font-weight: bold;
     }
+
+    /* Bigger yellow button */
+    .stButton > button {
+        font-size: 18px !important;
+        padding: 0.75em 1.5em;
+        border-radius: 8px;
+        background-color: #ffcc70;
+        color: black;
+        font-weight: 600;
+    }
+
+    /* Spacer between result and about */
+    .result-spacer {
+        margin-bottom: 40px;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# === Load the model safely ===
+# === Load model safely ===
 try:
     model = joblib.load("wine_model.pkl")
 except:
     st.error("⚠️ Could not load model file. Please check 'wine_model.pkl'.")
     st.stop()
 
-# === Title ===
+# === App Title and Description ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics and press **Predict Quality**:")
+st.write("Adjust the wine characteristics and press **Predict Quality**.")
 
 # === Input Sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
@@ -42,8 +57,8 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Prediction Button ===
-if st.button("Predict Quality"):
+# === Predict Button and Result ===
+if st.button("🔍 Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
 
@@ -53,10 +68,10 @@ if st.button("Predict Quality"):
     else:
         st.error("⚠️ This wine is likely NOT good quality.")
 
+    # Add space before About
+    st.markdown('<div class="result-spacer"></div>', unsafe_allow_html=True)
 
-
-
-# === About Section ===
+# === About the App ===
 with st.expander("📌 About this App"):
     st.markdown("""
     This wine quality prediction tool uses a trained machine learning model to estimate wine quality 
