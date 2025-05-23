@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background and style ===
+# === Background and styling ===
 st.markdown(
     """
     <style>
@@ -65,6 +65,6 @@ with st.expander("📌 About this App"):
     This wine quality prediction tool uses a trained machine learning model to estimate wine quality 
     based on chemical features such as acidity, alcohol, and sulphates.
 
-    **Author**: Zeina Mkhaeel  
+    **Author**: Zeina Mkhaeel**  
     🔗 [GitHub](https://github.com/zeinamkhaeel)
     """)
