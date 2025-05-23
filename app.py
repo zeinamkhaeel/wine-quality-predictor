@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# === Background and button styling ===
+# === Background and style ===
 st.markdown(
     """
     <style>
@@ -19,22 +19,6 @@ st.markdown(
         font-weight: bold;
     }
 
-    .stButton > button {
-        font-size: 18px !important;
-        padding: 0.75em 1.5em;
-        border-radius: 8px;
-        background-color: #ffcc70;
-        color: black !important;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border: none;
-    }
-
-    .stButton > button:hover {
-        background-color: #e6a940;
-        color: black !important;
-    }
-
     .result-spacer {
         margin-top: 30px;
         margin-bottom: 40px;
@@ -44,16 +28,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# === Load model safely ===
+# === Load model ===
 try:
     model = joblib.load("wine_model.pkl")
 except:
     st.error("⚠️ Could not load model file. Please check 'wine_model.pkl'.")
     st.stop()
 
-# === App Title and Instructions ===
+# === App Title ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics and press **Predict Quality**:")
+st.write("Adjust the wine characteristics to instantly predict wine quality.")
 
 # === Input sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
@@ -63,23 +47,17 @@ volatile_acidity = st.slider("Volatile Acidity", 0.1, 1.6, step=0.01)
 density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
-# === Maintain prediction result across reruns ===
-if "prediction_result" not in st.session_state:
-    st.session_state.prediction_result = None
+# === Instant Prediction ===
+input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
+prediction = model.predict(input_data)[0]
 
-if st.button("Predict Quality"):
-    input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
-    prediction = model.predict(input_data)[0]
-    st.session_state.prediction_result = prediction
+st.markdown("### Prediction Result:")
+if prediction == 1:
+    st.success("✅ This wine is likely GOOD quality.")
+else:
+    st.error("⚠️ This wine is likely NOT good quality.")
 
-# === Display prediction result if available ===
-if st.session_state.prediction_result is not None:
-    st.markdown("### Prediction Result:")
-    if st.session_state.prediction_result == 1:
-        st.success("✅ This wine is likely GOOD quality.")
-    else:
-        st.error("⚠️ This wine is likely NOT good quality.")
-    st.markdown('<div class="result-spacer"></div>', unsafe_allow_html=True)
+st.markdown('<div class="result-spacer"></div>', unsafe_allow_html=True)
 
 # === About Section ===
 with st.expander("📌 About this App"):
