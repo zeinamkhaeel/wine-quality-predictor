@@ -53,6 +53,9 @@ if st.button("Predict Quality"):
     else:
         st.error("⚠️ This wine is likely NOT good quality.")
 
+
+
+
 # === About Section ===
 with st.expander("📌 About this App"):
     st.markdown("""
