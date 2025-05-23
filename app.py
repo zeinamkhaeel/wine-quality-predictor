@@ -32,7 +32,7 @@ except:
 
 # === Title ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics and press **Predict Quality**.")
+st.write("Adjust the wine characteristics and press **Predict Quality**:")
 
 # === Input Sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
@@ -43,7 +43,7 @@ density = st.slider("Density", 0.9900, 1.0040, step=0.0001)
 chlorides = st.slider("Chlorides", 0.01, 0.6, step=0.01)
 
 # === Prediction Button ===
-if st.button("🔍 Predict Quality"):
+if st.button("Predict Quality"):
     input_data = np.array([[alcohol, sulphates, citric_acid, volatile_acidity, density, chlorides]])
     prediction = model.predict(input_data)[0]
 
