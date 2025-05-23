@@ -37,7 +37,7 @@ except:
 
 # === App Title ===
 st.title("🍷 Wine Quality Predictor")
-st.write("Adjust the wine characteristics to instantly predict wine quality.")
+st.write("Adjust the wine characteristics to instantly predict wine quality:")
 
 # === Input sliders ===
 alcohol = st.slider("Alcohol", 8.0, 15.0, step=0.1)
